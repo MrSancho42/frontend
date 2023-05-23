@@ -1,5 +1,5 @@
 import React from 'react';
-import UprateRecordModal from '../modals/UpdateRecordModal'
+import UprateRecordModal from '../modals/records/UpdateRecordModal'
 
 function Record({ record, forBusiness }) {
   const [modalShow, setModalShow] = React.useState(false);

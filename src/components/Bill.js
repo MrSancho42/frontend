@@ -2,8 +2,7 @@ import React from 'react';
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBriefcase, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import UpdateBillModal from '../modals/UpdateBillModal';
-
+import UpdateBillModal from '../modals/bills/UpdateBillModal';
 
 
 function Bill({ bill }) {

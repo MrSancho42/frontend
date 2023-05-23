@@ -1,6 +1,6 @@
 import React from 'react';
 import BlockHeader from '../components/BlockHeader';
-import AddBillModal from '../modals/AddBillModal';
+import AddBillModal from '../modals/bills/AddBillModal';
 import { Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";

@@ -73,6 +73,7 @@ function AddRecordModal(props) {
   useEffect(() => {
     FetchBills();
     setSelectedDate(moment(Date.now()));
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {if (bills.length > 0) setSelectedBill(bills[0].pk_bill)}, [bills]);
