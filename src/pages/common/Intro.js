@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-import LinkButton from "../components/LinkButton";
+import LinkButton from "../../components/LinkButton";
 
 
 function Intro() {

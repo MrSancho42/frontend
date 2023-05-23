@@ -177,5 +177,4 @@ function UprateRecordModal(props) {
   );
 }
 
-
 export default UprateRecordModal;

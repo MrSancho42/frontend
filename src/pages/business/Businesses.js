@@ -1,8 +1,8 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
 
-import BlockHeader from '../components/BlockHeader';
-import BusinessesList from '../views/BusinessesList';
+import BlockHeader from '../../components/BlockHeader';
+import BusinessesList from '../../views/BusinessesList';
 
 
 function Businesses() {

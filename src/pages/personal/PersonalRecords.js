@@ -1,7 +1,7 @@
 import React from 'react';
-import BlockHeader from '../components/BlockHeader';
-import BusinessRecordsList from '../views/BusinessRecordsList';
-import AddRecordModal from '../modals/records/AddRecordModal';
+import BlockHeader from '../../components/BlockHeader';
+import BusinessRecordsList from '../../views/BusinessRecordsList';
+import AddRecordModal from '../../modals/records/AddRecordModal';
 
 
 function PersonalRecords() {

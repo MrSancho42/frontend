@@ -1,19 +1,20 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import PersonalHeader from "./components/PersonalHeader";
 import BusinessHeader from "./components/BusinessHeader";
-import Intro from "./pages/Intro";
-import 'bootstrap/dist/css/bootstrap.min.css'
-import Registration from "./pages/Registration"
-import Login from "./pages/Login";
-import axios from 'axios';
-import PersonalMain from './pages/PersonalMain';
-import Businesses from './pages/Businesses'
-import BusinessMain from './pages/BusinessMain';
-import BusinessRecords from './pages/BusinessRecords';
-import PersonalRecords from './pages/PersonalRecords';
-import PersonalBudgets from './pages/PersonalBudgets';
-import BusinessEmployeers from './pages/BusinessEmployeers';
+import Intro from "./pages/common/Intro";
+import Registration from "./pages/common/Registration"
+import Login from "./pages/common/Login";
+import PersonalMain from './pages/personal/PersonalMain';
+import Businesses from './pages/business/Businesses'
+import BusinessMain from './pages/business/BusinessMain';
+import BusinessRecords from './pages/business/BusinessRecords';
+import PersonalRecords from './pages/personal/PersonalRecords';
+import PersonalBudgets from './pages/personal/PersonalBudgets';
+import BusinessEmployeers from './pages/business/BusinessEmployeers';
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import BlockHeader from '../components/BlockHeader';
-import BillsList from '../views/BillsList';
-import AddBillModal from '../modals/bills/AddBillModal';
+import BlockHeader from '../../components/BlockHeader';
+import BillsList from '../../views/BillsList';
+import AddBillModal from '../../modals/bills/AddBillModal';
 
 
 function PersonalMain() {
