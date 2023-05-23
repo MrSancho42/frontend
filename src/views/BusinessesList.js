@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Container, Card } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,24 +33,18 @@ function BusinessesList() {
 
   useEffect(() => {
     getBusinesses()
-    // const interval = setInterval(() => {
-    //   getBusinesses()
-    // }, 5000);
-    // return () => clearInterval(interval);
   }, []);
 
   return (
-    <Container className="mt-5">
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(250px, 1fr))', gridGap: '20px' }}>
-        {businesses.map((business) => (
-          <Card key={business.pk_business} onClick={() => {goToBusiness(business.pk_business)}} className='rounded-2 border-3 bg-light bg-gradient'>
-            <Card.Body>
-              <Card.Title>{business.name}</Card.Title>
-            </Card.Body>
-          </Card>
-        ))}
-      </div>
-    </Container>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gridGap: '20px' }}>
+      {businesses.map((business) => (
+        <Card key={business.pk_business} onClick={() => { goToBusiness(business.pk_business) }} className='rounded-2 border-3 bg-light bg-gradient'>
+          <Card.Body>
+            <Card.Title>{business.name}</Card.Title>
+          </Card.Body>
+        </Card>
+      ))}
+    </div>
   );
 };
 

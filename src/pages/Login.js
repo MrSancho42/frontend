@@ -47,7 +47,7 @@ function Login() {
       .then(response => {
         cookies.set('current-user', response.data.pk_user);
         if (toPersonalAccount) {
-          navigate('/personal/statistics')
+          navigate('/personal/main')
         } else {
           navigate('/business/list')
         }
