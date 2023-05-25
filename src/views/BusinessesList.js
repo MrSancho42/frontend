@@ -4,6 +4,8 @@ import Card from "react-bootstrap/Card";
 import { Cookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
+import Business from '../components/Business';
+
 
 const cookies = new Cookies();
 
@@ -38,11 +40,7 @@ function BusinessesList() {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gridGap: '20px' }}>
       {businesses.map((business) => (
-        <Card key={business.pk_business} onClick={() => { goToBusiness(business.pk_business) }} className='rounded-2 border-3 bg-light bg-gradient'>
-          <Card.Body>
-            <Card.Title>{business.name}</Card.Title>
-          </Card.Body>
-        </Card>
+        <Business key={business.pk_business} business={business} onClick={() => { goToBusiness(business.pk_business) }} />
       ))}
     </div>
   );

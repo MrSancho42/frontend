@@ -1,29 +1,33 @@
-import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Modal, Form, } from "react-bootstrap";
 import { Cookies } from 'react-cookie';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import ToggleButton from 'react-bootstrap/ToggleButton';
+import React, { useState, useEffect } from 'react';
+
+import { Button, Modal, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
+
+import moment from 'moment';
 import Datetime from 'react-datetime';
 import 'react-datetime/css/react-datetime.css';
-import moment from 'moment';
 import 'moment/locale/uk';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 
 moment.locale('uk');
 
 const cookies = new Cookies();
 
-function AddRecordModal(props) {
-  const [show, setShow] = useState(true);
+function UprateRecordModal(props) {
+  const [notDelete, setNotDelete] = useState(true);
 
   const [bills, setBills] = useState([]);
-  const [selectedBill, setSelectedBill] = useState(0);
-  const [amount, setAmount] = useState(0);
-  const [description, setDescription] = useState('');
-  const [kind, setKind] = useState('INCOME');
-  const [currency, setCurrency] = useState('UAH');
-  const [selectedDate, setSelectedDate] = useState();
+
+  const [selectedBill, setSelectedBill] = useState(props.record.fk_bill);
+  const [amount, setAmount] = useState(props.record.amount);
+  const [description, setDescription] = useState(props.record.description);
+  const [kind, setKind] = useState(props.record.kind);
+  const [currency, setCurrency] = useState(props.record.currency);
+  const [selectedDate, setSelectedDate] = useState(moment(Date.parse(props.record.creation_time)));
 
   const kindOption = [
     { value: 'INCOME', label: 'Дохід', variant: 'outline-success' },
@@ -31,7 +35,7 @@ function AddRecordModal(props) {
     // { value: 'transfer', label: 'Переказ', variant: 'outline-danger'},
   ];
 
-  function FetchBills() {
+  function getBills() {
     const params = {
       params: {
         pk_user: cookies.get('current-user'),
@@ -44,44 +48,40 @@ function AddRecordModal(props) {
       })
   }
 
-  function createRecord() {
+  function UpdateRecord() {
+    console.log(selectedDate)
     const requestBody = {
-      pk_bill: selectedBill,
-      pk_category: 0,
-      business_record: {
-        amount: amount,
-        description: description,
-        currency: currency,
-        kind: kind,
-        creation_time: selectedDate.format('YYYY-MM-DDTHH:mm:ss.SSSSSS')
-      }
+      pk_record: props.record.pk_record,
+      fk_bill: selectedBill,
+      amount: amount,
+      description: description,
+      currency: currency,
+      kind: kind,
+      creation_time: selectedDate.format('YYYY-MM-DDTHH:mm:ss.SSSSSS')
     };
 
-    var resource = "/record-services/create"
+    var resource = "/record-services/update"
     if (props.forBusiness) {
-      requestBody.pk_business = cookies.get('current-business');
-      resource = "/business-record-services/create"
+      resource = "/business-record-services/update"
     }
-    axios.post(resource, requestBody)
-      .then(response => {
-        if (response.status === 201) {
-          setShow(false);
-          window.location.reload();
-        }
-      })
+    axios.patch(resource, requestBody)
+  }
+
+  function DeleteRecord() {
+    console.log(`Delete record ${props.record.pk_record}`)
+    setNotDelete(false)
   }
 
   useEffect(() => {
-    FetchBills();
-    setSelectedDate(moment(Date.now()));
+    getBills();
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {if (bills.length > 0) setSelectedBill(bills[0].pk_bill)}, [bills]);
+  useEffect(() => { if (bills.length > 0) setSelectedBill(bills[0].pk_bill) }, [bills]);
 
   return (
     <Modal
-      show={props.show && show}
+      show={props.show && notDelete}
       onHide={props.onHide}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -93,7 +93,7 @@ function AddRecordModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form onSubmit={createRecord}>
+        <Form onSubmit={UpdateRecord}>
           <ButtonGroup toggle className='w-100 mb-3'>
             {kindOption.map((option) => (
               <ToggleButton
@@ -126,7 +126,8 @@ function AddRecordModal(props) {
           <Form.Group className="mb-3">
             <Form.Label>Сума</Form.Label>
             <Form.Control
-              required type="number" placeholder="Сума"  min="0" step="0.01" onKeyPress={(event) => {
+              value={amount}
+              required type="number" placeholder="Сума" min="0" step="0.01" onKeyDown={(event) => {
                 if (event.key === '-') event.preventDefault()
               }}
               onChange={(event) => { setAmount(Number(event.target.value)) }}
@@ -136,6 +137,7 @@ function AddRecordModal(props) {
           <Form.Group className="mb-3">
             <Form.Label>Коментар</Form.Label>
             <Form.Control
+              value={description}
               type="text" placeholder="Коментар"
               onChange={(event) => { setDescription(event.target.value) }}
             />
@@ -155,22 +157,24 @@ function AddRecordModal(props) {
           <Datetime
             className="mb-3"
             value={selectedDate}
-            onChange={(event) => {
-              console.log(selectedDate)
-              console.log(typeof(selectedDate))
-
-              console.log(event)
-              console.log(typeof(event))
-              return setSelectedDate(event)
-            }}
+            onChange={(date) => setSelectedDate(date)}
             dateFormat='D MMM Y р.,'
             locale="uk" />
-          <Button type="submit" className="w-100">Створити</Button>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Button className='w-100' variant="primary" type="submit">
+              Внести зміни
+            </Button>
+            <Button
+              className='ms-3 text-nowrap' variant="danger" type="button"
+              onClick={() => DeleteRecord()} >
+              Видалити
+              <FontAwesomeIcon className='ms-2' icon={faTrashCan} />
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
     </Modal>
   );
 }
 
-
-export default AddRecordModal;
+export default UprateRecordModal;
