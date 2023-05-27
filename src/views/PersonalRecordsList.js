@@ -13,10 +13,10 @@ function PersonalRecordsList() {
   function getRecords() {
     const params = {
       params: {
-        pk_personal: cookies.get('current-personal'),
+        pk_user: cookies.get('current-user'),
       }
     };
-    axios.get('/personal-record-services/get-personal-records', params)
+    axios.get('/record-services/get-records', params)
       .then(response => {
         setRecords(response.data);
       })
@@ -43,7 +43,7 @@ function PersonalRecordsList() {
           <h6>{group}</h6>
           {groupedRecords[group].map((groupRecord) => (
             <Record
-              key={groupRecord.pk_record} forBusiness={true} record={groupRecord} />
+              key={groupRecord.pk_record} forBusiness={false} record={groupRecord} />
           ))}
         </div>
       ))}

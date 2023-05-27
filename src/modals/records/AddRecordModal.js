@@ -151,7 +151,7 @@ function AddRecordModal(props) {
     if (bills.length > 0) setSelectedBill(bills[0].pk_bill);
   }, [bills]);
   useEffect(() => {
-    if (categories.length > 0) setSelectedCategory(categories[0].pk_category);
+    if (categories.length > 0) setSelectedCategory(categories[0].pk_user_category);
   }, [categories]);
   useEffect(() => {
     if (props.forBusiness) {
