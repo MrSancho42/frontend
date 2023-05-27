@@ -17,6 +17,37 @@ moment.locale('uk');
 
 const cookies = new Cookies();
 
+function BusinessRecordSubKinds(props) {
+  if (props.kind === 'INCOME') {
+    return (
+      <Form.Group className="mb-3">
+        <Form.Label>Вид доходу</Form.Label>
+        <Form.Select
+          value={props.subKind}
+          onChange={(event) => props.setSubKind(event.target.value)}
+        >
+          <option key='CASH' value='CASH'>Готівковий розрахунок</option>
+          <option key='NON_CASH' value='NON_CASH'>Безготівковий розрахунок</option>
+          <option key='FREE_RECEIVED' value='FREE_RECEIVED'>Безоплатно отриманий дохід</option>
+          <option key='GRANTS' value='GRANTS'>Грантові кошти</option>
+        </Form.Select>
+      </Form.Group>
+    );
+  }
+  return (
+    <Form.Group className="mb-3">
+      <Form.Label>Вид витрати</Form.Label>
+      <Form.Select
+        value={props.subKind}
+        onChange={(event) => props.setSubKind(event.target.value)}
+      >
+        <option key='REGULAR_SPENDING' value='REGULAR_SPENDING'>Витрата</option>
+        <option key='REFUND' value='REFUND'>Повернення коштів</option>
+      </Form.Select>
+    </Form.Group>
+  );
+}
+
 function UprateRecordModal(props) {
   const [notDelete, setNotDelete] = useState(true);
 
@@ -26,6 +57,7 @@ function UprateRecordModal(props) {
   const [amount, setAmount] = useState(props.record.amount);
   const [description, setDescription] = useState(props.record.description);
   const [kind, setKind] = useState(props.record.kind);
+  const [subKind, setSubKind] = useState(props.record.sub_kind);
   const [currency, setCurrency] = useState(props.record.currency);
   const [selectedDate, setSelectedDate] = useState(moment(Date.parse(props.record.creation_time)));
 
@@ -63,6 +95,7 @@ function UprateRecordModal(props) {
     var resource = "/record-services/update"
     if (props.forBusiness) {
       resource = "/business-record-services/update"
+      requestBody.sub_kind = subKind;
     }
     axios.patch(resource, requestBody)
   }
@@ -104,12 +137,22 @@ function UprateRecordModal(props) {
                 name="options"
                 value={option.value}
                 checked={kind === option.value}
-                onChange={(event) => setKind(event.target.value)}
+                onChange={(event) => {
+                  setKind(event.target.value)
+                  if (kind === 'INCOME') setSubKind('NON_CASH')
+                  if (kind === 'SPENDING') setSubKind('REGULAR_SPENDING')
+                }}
               >
                 {option.label}
               </ToggleButton>
             ))}
           </ButtonGroup>
+
+          {
+            props.forBusiness
+              ? <BusinessRecordSubKinds kind={kind} subKind={subKind} setSubKind={setSubKind} />
+              : null
+          }
 
           <Form.Group className="mb-3">
             <Form.Label>Рахунок</Form.Label>

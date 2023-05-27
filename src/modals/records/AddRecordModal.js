@@ -13,6 +13,37 @@ moment.locale("uk");
 
 const cookies = new Cookies();
 
+function BusinessRecordSubKinds(props) {
+  if (props.kind === 'INCOME') {
+    return (
+      <Form.Group className="mb-3">
+        <Form.Label>Вид доходу</Form.Label>
+        <Form.Select
+          value={props.subKind}
+          onChange={(event) => props.setSubKind(event.target.value)}
+        >
+          <option key='CASH' value='CASH'>Готівковий розрахунок</option>
+          <option key='NON_CASH' value='NON_CASH'>Безготівковий розрахунок</option>
+          <option key='FREE_RECEIVED' value='FREE_RECEIVED'>Безоплатно отриманий дохід</option>
+          <option key='GRANTS' value='GRANTS'>Грантові кошти</option>
+        </Form.Select>
+      </Form.Group>
+    );
+  }
+  return (
+    <Form.Group className="mb-3">
+      <Form.Label>Вид витрати</Form.Label>
+      <Form.Select
+        value={props.subKind}
+        onChange={(event) => props.setSubKind(event.target.value)}
+      >
+        <option key='REGULAR_SPENDING' value='REGULAR_SPENDING'>Витрата</option>
+        <option key='REFUND' value='REFUND'>Повернення коштів</option>
+      </Form.Select>
+    </Form.Group>
+  );
+}
+
 function AddRecordModal(props) {
   const [show, setShow] = useState(true);
 
@@ -23,6 +54,7 @@ function AddRecordModal(props) {
   const [amount, setAmount] = useState(0);
   const [description, setDescription] = useState("");
   const [kind, setKind] = useState("INCOME");
+  const [subKind, setSubKind] = useState("NON_CASH");
   const [currency, setCurrency] = useState("UAH");
   const [selectedDate, setSelectedDate] = useState();
 
@@ -70,6 +102,7 @@ function AddRecordModal(props) {
           description: description,
           currency: currency,
           kind: kind,
+          sub_kind: subKind,
           creation_time: selectedDate.format("YYYY-MM-DDTHH:mm:ss.SSSSSS"),
         },
       };
@@ -108,6 +141,10 @@ function AddRecordModal(props) {
   useEffect(() => {
     if (categories.length > 0) setSelectedCategory(categories[0].pk_category);
   }, [categories]);
+  useEffect(() => {
+    if (kind === 'INCOME') setSubKind('NON_CASH')
+    if (kind === 'SPENDING') setSubKind('REGULAR_SPENDING')
+  }, [kind]);
 
   return (
     <Modal
@@ -140,6 +177,12 @@ function AddRecordModal(props) {
               </ToggleButton>
             ))}
           </ButtonGroup>
+
+          {
+            props.forBusiness
+              ? <BusinessRecordSubKinds kind={kind} subKind={subKind} setSubKind={setSubKind} />
+              : null
+          }
 
           <Form.Group className="mb-3">
             <Form.Label>Рахунок</Form.Label>

@@ -13,6 +13,14 @@ function Record({ record, forBusiness }) {
   });
 
   const isIncome = record.kind === 'INCOME';
+  const subKind = {
+    'CASH': 'Готівковий розрахунок',
+    'NON_CASH': 'Безготівковий розрахунок',
+    'FREE_RECEIVED': 'Безоплатно отриманий дохід',
+    'GRANTS': 'Грантові кошти',
+    'REGULAR_SPENDING': 'Витрата',
+    'REFUND': 'Повернення коштів'
+  }[record.sub_kind]
 
   return (
     <>
@@ -21,13 +29,18 @@ function Record({ record, forBusiness }) {
         className={`w-100 d-flex justify-content-between border border-3 ${isIncome ? "border-success" : "border-danger"} rounded`}
         onClick={() => setModalShow(true)}>
         <div className='w-100 d-flex justify-content-between p-2'>
-          <div>
-            <b className='h5'>{!isIncome ? '-' : ''}{record.amount}</b>
-            <span className='mx-2'>{record.currency}</span>
+          <div className='d-flex'>
+            <div className='d-flex align-items-center'>
+              <b className='h5 m-0'>{!isIncome ? '-' : ''}{record.amount}</b>
+              <span className='mx-2'>{record.currency}</span>
+            </div>
           </div>
-          <div>
-            <span>{record.description}</span>
-            <span className='ms-3'>{formattedTime}</span>
+          <div className='d-flex align-items-center justify-content-end'>
+            <div className='d-flex flex-column justify-content-end'>
+              <span className='text-end'>{record.description}</span>
+              <span className='text-muted text-end' style={{'font-size': '14px'}}>{subKind}</span>
+            </div>
+            <span style={{width: 186}} className='text-end'>{formattedTime}</span>
           </div>
         </div>
         <div className={isIncome ? 'bg-success' : 'bg-danger'} style={{ width: '2em', height: '100%' }} />
