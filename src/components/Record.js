@@ -33,6 +33,7 @@ function Record({ record, forBusiness }) {
             <div className='d-flex align-items-center'>
               <b className='h5 m-0'>{!isIncome ? '-' : ''}{record.amount}</b>
               <span className='mx-2'>{record.currency}</span>
+              <span className='mx-2'>{!forBusiness ? record.category_name : ''}</span>
             </div>
           </div>
           <div className='d-flex align-items-center justify-content-end'>

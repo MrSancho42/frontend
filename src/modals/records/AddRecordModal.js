@@ -14,7 +14,7 @@ moment.locale("uk");
 const cookies = new Cookies();
 
 function BusinessRecordSubKinds(props) {
-  if (props.kind === 'INCOME') {
+  if (props.kind === "INCOME") {
     return (
       <Form.Group className="mb-3">
         <Form.Label>Вид доходу</Form.Label>
@@ -22,10 +22,18 @@ function BusinessRecordSubKinds(props) {
           value={props.subKind}
           onChange={(event) => props.setSubKind(event.target.value)}
         >
-          <option key='CASH' value='CASH'>Готівковий розрахунок</option>
-          <option key='NON_CASH' value='NON_CASH'>Безготівковий розрахунок</option>
-          <option key='FREE_RECEIVED' value='FREE_RECEIVED'>Безоплатно отриманий дохід</option>
-          <option key='GRANTS' value='GRANTS'>Грантові кошти</option>
+          <option key="CASH" value="CASH">
+            Готівковий розрахунок
+          </option>
+          <option key="NON_CASH" value="NON_CASH">
+            Безготівковий розрахунок
+          </option>
+          <option key="FREE_RECEIVED" value="FREE_RECEIVED">
+            Безоплатно отриманий дохід
+          </option>
+          <option key="GRANTS" value="GRANTS">
+            Грантові кошти
+          </option>
         </Form.Select>
       </Form.Group>
     );
@@ -37,8 +45,12 @@ function BusinessRecordSubKinds(props) {
         value={props.subKind}
         onChange={(event) => props.setSubKind(event.target.value)}
       >
-        <option key='REGULAR_SPENDING' value='REGULAR_SPENDING'>Витрата</option>
-        <option key='REFUND' value='REFUND'>Повернення коштів</option>
+        <option key="REGULAR_SPENDING" value="REGULAR_SPENDING">
+          Витрата
+        </option>
+        <option key="REFUND" value="REFUND">
+          Повернення коштів
+        </option>
       </Form.Select>
     </Form.Group>
   );
@@ -139,11 +151,13 @@ function AddRecordModal(props) {
     if (bills.length > 0) setSelectedBill(bills[0].pk_bill);
   }, [bills]);
   useEffect(() => {
-    if (categories.length > 0) setSelectedCategory(categories[0].pk_category);
+    if (categories.length > 0) setSelectedCategory(categories[0].pk_user_category);
   }, [categories]);
   useEffect(() => {
-    if (kind === 'INCOME') setSubKind('NON_CASH')
-    if (kind === 'SPENDING') setSubKind('REGULAR_SPENDING')
+    if (props.forBusiness) {
+      if (kind === "INCOME") setSubKind("NON_CASH");
+      if (kind === "SPENDING") setSubKind("REGULAR_SPENDING");
+    }
   }, [kind]);
 
   return (
@@ -178,11 +192,13 @@ function AddRecordModal(props) {
             ))}
           </ButtonGroup>
 
-          {
-            props.forBusiness
-              ? <BusinessRecordSubKinds kind={kind} subKind={subKind} setSubKind={setSubKind} />
-              : null
-          }
+          {props.forBusiness ? (
+            <BusinessRecordSubKinds
+              kind={kind}
+              subKind={subKind}
+              setSubKind={setSubKind}
+            />
+          ) : null}
 
           <Form.Group className="mb-3">
             <Form.Label>Рахунок</Form.Label>

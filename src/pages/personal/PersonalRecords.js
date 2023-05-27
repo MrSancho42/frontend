@@ -1,6 +1,6 @@
 import React from 'react';
 import BlockHeader from '../../components/BlockHeader';
-import BusinessRecordsList from '../../views/PersonalRecordsList';
+import PersonalRecordsList from '../../views/PersonalRecordsList';
 import AddRecordModal from '../../modals/records/AddRecordModal';
 
 
@@ -11,6 +11,7 @@ function PersonalRecords() {
     <>
       <BlockHeader title="Записи" buttonText="Новий запис" onButtonClick={() => setModalShow(true)} />
       <AddRecordModal forBusiness={false} show={modalShow} onHide={() => setModalShow(false)} />
+      <PersonalRecordsList/>
     </>
   );
 };
