@@ -14,7 +14,7 @@ moment.locale('uk');
 
 const cookies = new Cookies();
 
-function AddRecordModal(props) {
+function AddBusinessModal(props) {
   const [show, setShow] = useState(true);
 
   const [bills, setBills] = useState([]);
@@ -173,4 +173,4 @@ function AddRecordModal(props) {
 }
 
 
-export default AddRecordModal;
+export default AddBusinessModal;

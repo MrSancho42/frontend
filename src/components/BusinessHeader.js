@@ -15,8 +15,6 @@ function BusinessHeader() {
             <Nav className="me-auto">
               <Nav.Link href="main">Головна</Nav.Link>
               <Nav.Link href="accounting-book">Книга обліку доходів</Nav.Link>
-              <Nav.Link href="records">Витрати</Nav.Link>
-              <Nav.Link href="employeers">Працівники</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

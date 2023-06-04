@@ -214,36 +214,38 @@ function AddRecordModal(props) {
             </Form.Select>
           </Form.Group>
 
-          <FormGroup className="mb-3">
-            <Form.Label>Категорія</Form.Label>
-            <Form.Select
-              value={selectedCategory}
-              onChange={(event) => setSelectedCategory(event.target.value)}
-            >
-              {categories.map((category) => (
-                <>
-                  <option
-                    key={category.pk_user_category}
-                    value={category.pk_user_category}
-                  >
-                    {category.name}
-                  </option>
-                  {category.child_categories ? (
-                    <>
-                      {category.child_categories.map((child_category) => (
-                        <option
-                          key={child_category.pk_user_category}
-                          value={child_category.pk_user_category}
-                        >
-                          {"-  " + child_category.name}
-                        </option>
-                      ))}
-                    </>
-                  ) : null}
-                </>
-              ))}
-            </Form.Select>
-          </FormGroup>
+          {!props.forBusiness ? (
+            <FormGroup className="mb-3">
+              <Form.Label>Категорія</Form.Label>
+              <Form.Select
+                value={selectedCategory}
+                onChange={(event) => setSelectedCategory(event.target.value)}
+              >
+                {categories.map((category) => (
+                  <>
+                    <option
+                      key={category.pk_user_category}
+                      value={category.pk_user_category}
+                    >
+                      {category.name}
+                    </option>
+                    {category.child_categories ? (
+                      <>
+                        {category.child_categories.map((child_category) => (
+                          <option
+                            key={child_category.pk_user_category}
+                            value={child_category.pk_user_category}
+                          >
+                            {"-  " + child_category.name}
+                          </option>
+                        ))}
+                      </>
+                    ) : null}
+                  </>
+                ))}
+              </Form.Select>
+            </FormGroup>
+          ) : null}
 
           <Form.Group className="mb-3">
             <Form.Label>Сума</Form.Label>
