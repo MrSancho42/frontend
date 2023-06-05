@@ -125,6 +125,7 @@ function UpdateRecordModal(props) {
     FetchCategories();
     console.log("selectedCategory")
     console.log(selectedCategory)
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => { if (bills.length > 0) setSelectedBill(bills[0].pk_bill) }, [bills]);
