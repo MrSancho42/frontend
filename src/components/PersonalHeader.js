@@ -16,6 +16,7 @@ function PersonalHeader() {
               <Nav.Link href="main">Головна</Nav.Link>
               <Nav.Link href="records">Записи</Nav.Link>
               <Nav.Link href="budgets">Бюджети</Nav.Link>
+              <Nav.Link href="groups">Групи</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

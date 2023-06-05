@@ -16,6 +16,8 @@ import PersonalRecords from './pages/personal/PersonalRecords';
 import PersonalBudgets from './pages/personal/PersonalBudgets';
 import BusinessEmployeers from './pages/business/BusinessEmployeers';
 import AccountingBook from './pages/business/AccountingBook';
+import Groups from './pages/personal/Groups';
+import GroupMain from './pages/personal/GroupMain';
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000/';
 
@@ -38,6 +40,10 @@ createRoot(document.getElementById("root")).render(
         <Route path="main" element={<PersonalMain />} />
         <Route path="records" element={<PersonalRecords />} />
         <Route path="budgets" element={<PersonalBudgets />} />
+        <Route path="groups">
+          <Route path="" element={<Groups />} />
+          <Route path="group" element={<GroupMain />} />
+        </Route>
       </Route>
       <Route
         path="*"
