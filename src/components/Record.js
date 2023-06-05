@@ -7,9 +7,6 @@ function Record({ record, forBusiness }) {
   const formattedTime = new Date(record.creation_time).toLocaleTimeString('uk', {
     hour: '2-digit',
     minute: '2-digit',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
   });
 
   const isIncome = record.kind === 'INCOME';
@@ -39,9 +36,9 @@ function Record({ record, forBusiness }) {
           <div className='d-flex align-items-center justify-content-end'>
             <div className='d-flex flex-column justify-content-end'>
               <span className='text-end'>{record.description}</span>
-              <span className='text-muted text-end' style={{'font-size': '14px'}}>{subKind}</span>
+              <span className='text-end' style={{'font-size': '14px'}}>{subKind}</span>
             </div>
-            <span style={{width: 186}} className='text-end'>{formattedTime}</span>
+            <span style={{width: 50}} className='text-end'>{formattedTime}</span>
           </div>
         </div>
         <div className={isIncome ? 'bg-success' : 'bg-danger'} style={{ width: '2em', height: '100%' }} />

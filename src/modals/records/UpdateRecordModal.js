@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Cookies } from 'react-cookie';
 import React, { useState, useEffect } from 'react';
 
-import { Button, Modal, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
+import { Button, Modal, Form, ButtonGroup, ToggleButton, FormGroup } from "react-bootstrap";
 
 import moment from 'moment';
 import Datetime from 'react-datetime';
@@ -48,12 +48,14 @@ function BusinessRecordSubKinds(props) {
   );
 }
 
-function UprateRecordModal(props) {
+function UpdateRecordModal(props) {
   const [notDelete, setNotDelete] = useState(true);
 
   const [bills, setBills] = useState([]);
 
   const [selectedBill, setSelectedBill] = useState(props.record.fk_bill);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(0);
   const [amount, setAmount] = useState(props.record.amount);
   const [description, setDescription] = useState(props.record.description);
   const [kind, setKind] = useState(props.record.kind);
@@ -80,11 +82,24 @@ function UprateRecordModal(props) {
       })
   }
 
+  function FetchCategories() {
+    const params = {
+      params: {
+        pk_user: cookies.get("current-user"),
+      },
+    };
+    axios
+      .get("/user-category-services/get-user-categories", params)
+      .then((response) => {
+        setCategories(response.data);
+      });
+  }
+
   function UpdateRecord() {
-    console.log(selectedDate)
     const requestBody = {
       pk_record: props.record.pk_record,
       fk_bill: selectedBill,
+      fk_category: selectedCategory,
       amount: amount,
       description: description,
       currency: currency,
@@ -107,7 +122,9 @@ function UprateRecordModal(props) {
 
   useEffect(() => {
     getBills();
-    // eslint-disable-next-line
+    FetchCategories();
+    console.log("selectedCategory")
+    console.log(selectedCategory)
   }, []);
 
   useEffect(() => { if (bills.length > 0) setSelectedBill(bills[0].pk_bill) }, [bills]);
@@ -122,7 +139,7 @@ function UprateRecordModal(props) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Новий запис
+          Редагувати запис
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -165,6 +182,39 @@ function UprateRecordModal(props) {
               ))}
             </Form.Select>
           </Form.Group>
+
+          {!props.forBusiness ? (
+            <FormGroup className="mb-3">
+              <Form.Label>Категорія</Form.Label>
+              <Form.Select
+                value={selectedCategory}
+                onChange={(event) => setSelectedCategory(event.target.value)}
+              >
+                {categories.map((category) => (
+                  <>
+                    <option
+                      key={category.pk_user_category}
+                      value={category.pk_user_category}
+                    >
+                      {category.name}
+                    </option>
+                    {category.child_categories ? (
+                      <>
+                        {category.child_categories.map((child_category) => (
+                          <option
+                            key={child_category.pk_user_category}
+                            value={child_category.pk_user_category}
+                          >
+                            {"-  " + child_category.name}
+                          </option>
+                        ))}
+                      </>
+                    ) : null}
+                  </>
+                ))}
+              </Form.Select>
+            </FormGroup>
+          ) : null}
 
           <Form.Group className="mb-3">
             <Form.Label>Сума</Form.Label>
@@ -220,4 +270,4 @@ function UprateRecordModal(props) {
   );
 }
 
-export default UprateRecordModal;
+export default UpdateRecordModal;
