@@ -158,6 +158,7 @@ function AddRecordModal(props) {
       if (kind === "INCOME") setSubKind("NON_CASH");
       if (kind === "SPENDING") setSubKind("REGULAR_SPENDING");
     }
+    // eslint-disable-next-line
   }, [kind]);
 
   return (

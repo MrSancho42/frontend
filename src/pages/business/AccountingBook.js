@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Cookies } from "react-cookie";
 import Datetime from "react-datetime";
@@ -26,7 +26,8 @@ function AccountingBook() {
       params: {
         year: selectedYear,
         month: selectedMonth.format('MMMM'),
-        group: group
+        group: group,
+        pk_business: cookies.get("current-business")
       },
       responseType: "blob",
     })
