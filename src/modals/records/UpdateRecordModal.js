@@ -138,12 +138,12 @@ function UpdateRecordModal(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className="sq-modal">
         <Modal.Title id="contained-modal-title-vcenter">
           Редагувати запис
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="sq-modal">
         <Form onSubmit={UpdateRecord}>
           <ButtonGroup toggle className='w-100 mb-3'>
             {kindOption.map((option) => (
@@ -155,6 +155,7 @@ function UpdateRecordModal(props) {
                 name="options"
                 value={option.value}
                 checked={kind === option.value}
+                className="green-type"
                 onChange={(event) => {
                   setKind(event.target.value)
                   if (kind === 'INCOME') setSubKind('NON_CASH')
@@ -173,9 +174,9 @@ function UpdateRecordModal(props) {
           }
 
           <Form.Group className="mb-3">
-            <Form.Label>Рахунок</Form.Label>
+            <Form.Label className="input-title">Рахунок</Form.Label>
             <Form.Select
-              value={selectedBill}
+              value={selectedBill} className="input-field"
               onChange={(event) => setSelectedBill(event.target.value)}
             >
               {bills.map((bill) => (
@@ -186,9 +187,9 @@ function UpdateRecordModal(props) {
 
           {!props.forBusiness ? (
             <FormGroup className="mb-3">
-              <Form.Label>Категорія</Form.Label>
+              <Form.Label className="input-title">Категорія</Form.Label>
               <Form.Select
-                value={selectedCategory}
+                value={selectedCategory} className="input-field"
                 onChange={(event) => setSelectedCategory(event.target.value)}
               >
                 {categories.map((category) => (
@@ -218,9 +219,9 @@ function UpdateRecordModal(props) {
           ) : null}
 
           <Form.Group className="mb-3">
-            <Form.Label>Сума</Form.Label>
+            <Form.Label className="input-title">Сума</Form.Label>
             <Form.Control
-              value={amount}
+              value={amount} className="input-field"
               required type="number" placeholder="Сума" min="0" step="0.01" onKeyDown={(event) => {
                 if (event.key === '-') event.preventDefault()
               }}
@@ -229,18 +230,18 @@ function UpdateRecordModal(props) {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Коментар</Form.Label>
+            <Form.Label className="input-title">Коментар</Form.Label>
             <Form.Control
-              value={description}
+              value={description} className="input-field"
               type="text" placeholder="Коментар"
               onChange={(event) => { setDescription(event.target.value) }}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Валюта</Form.Label>
+            <Form.Label className="input-title">Валюта</Form.Label>
             <Form.Select
-              value={currency}
+              value={currency} className="input-field"
               onChange={(event) => setCurrency(event.target.value)}
             >
               <option key="UAH" value="UAH">UAH</option>
@@ -249,7 +250,7 @@ function UpdateRecordModal(props) {
           </Form.Group>
 
           <Datetime
-            className="mb-3"
+            className="mb-3 calendar"
             value={selectedDate}
             onChange={(date) => setSelectedDate(date)}
             dateFormat='D MMM Y р.,'

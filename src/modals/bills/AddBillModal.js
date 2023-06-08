@@ -40,21 +40,21 @@ function AddBillModal(props) {
     <Modal
       show={props.show && show}
       onHide={props.onHide}
-      size="lg"
+      size="sg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className="sq-modal">
         <Modal.Title id="contained-modal-title-vcenter">
           Новий рахунок
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="sq-modal">
         <Form>
           <Form.Group className="mb-3">
             <Form.Label>Назва рахунку</Form.Label>
             <Form.Control
-              required type="text" placeholder="Рахунок"
+              required type="text" placeholder="Рахунок" className="input-field"
               onChange={(event) => {setName(event.target.value)}}
             />
           </Form.Group>
@@ -62,7 +62,7 @@ function AddBillModal(props) {
           <Form.Group className="mb-3">
             <Form.Label>Початкова сума</Form.Label>
             <Form.Control
-              required type="number" placeholder="Рахунок"
+              required type="number" placeholder="Рахунок" className="input-field"
               onChange={(event) => {setAmount(event.target.value)}}
             />
           </Form.Group>
@@ -70,7 +70,7 @@ function AddBillModal(props) {
           <Form.Group className="mb-3">
             <Form.Label>Валюта</Form.Label>
             <Form.Select
-              value={currency}
+              value={currency} className="input-field"
               onChange={(event) => {setCurrency(event.target.value)}}
             >
               <option value="UAH">UAH</option>
@@ -82,11 +82,12 @@ function AddBillModal(props) {
             type="switch" label="Відображати для бізнесу"
             onChange={(event) => {setIsForBusiness(event.target.checked)}}
           />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+            <Button className='w-100 accept-button' variant="primary"  onClick={createBill}>Створити</Button>
+          </div>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={createBill}>Створити</Button>
-      </Modal.Footer>
     </Modal>
   );
 }

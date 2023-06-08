@@ -40,7 +40,7 @@ function PersonalRecordsList() {
     <div className="d-grid gap-4">
       {Object.keys(groupedRecords).map((group) => (
         <div className="d-grid gap-2" key={group}>
-          <h6>{group}</h6>
+          <h4 className="ms-auto" key={group}>{group}</h4>
           {groupedRecords[group].map((groupRecord) => (
             <Record
               key={groupRecord.pk_record} forBusiness={false} record={groupRecord} />

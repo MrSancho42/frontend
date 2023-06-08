@@ -37,37 +37,37 @@ function UpdateBillModal(props) {
     <Modal
       show={props.show && notDelete}
       onHide={props.onHide}
-      size="lg"
+      size="sg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className="sq-modal">
         <Modal.Title id="contained-modal-title-vcenter">
           Редагувати рахунок
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="sq-modal">
         <Form onSubmit={ChangeBill}>
           <Form.Group className="mb-3">
-            <Form.Label>Назва рахунку</Form.Label>
+            <Form.Label className="input-title">Назва рахунку</Form.Label>
             <Form.Control
-              required type="text" placeholder="Рахунок" value={name}
+              required type="text" placeholder="Рахунок" value={name} className="input-field"
               onChange={(event) => {setName(event.target.value)}}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Поточна сума</Form.Label>
+            <Form.Label className="input-title">Поточна сума</Form.Label>
             <Form.Control
-              required type="number" placeholder="Рахунок" value={amount}
+              required type="number" placeholder="Рахунок" value={amount} className="input-field"
               onChange={(event) => {setAmount(event.target.value)}}
             />
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>Валюта</Form.Label>
+            <Form.Label className="input-title">Валюта</Form.Label>
             <Form.Select
-              value={currency}
+              value={currency} className="input-field"
               onChange={(event) => {setCurrency(event.target.value)}}
             >
               <option value="UAH">UAH</option>
@@ -81,7 +81,7 @@ function UpdateBillModal(props) {
           />
 
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button className='w-100' variant="primary" type="submit">
+            <Button className='w-100 accept-button' variant="primary" type="submit">
               Внести зміни
             </Button>
             <Button

@@ -39,13 +39,13 @@ function PersonalBudgets() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, 1fr', gridGap: '20px' }}>
         {bills.map((bill) => (
           <Card key={bill.pk_bill} className='rounded-2 border-3 bg-light bg-gradient'>
-            <Card.Header style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Card.Header style={{ display: 'flex', justifyContent: 'space-between' }} className=' sq-modal'>
               <div>
-                <span>{bill.name}</span>
+                <h3>{bill.name}</h3>
               </div>
               <FontAwesomeIcon className='fa-lg' icon={faPenToSquare} />
             </Card.Header>
-            <Card.Body>
+            <Card.Body className='sq-modal'>
               <Card.Title>Витрачено: {bill.amount} / {bill.limit} {bill.currency}</Card.Title>
               <div className="progress">
                 <div

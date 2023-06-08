@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './index.css'
 
 import PersonalHeader from "./components/PersonalHeader";
 import BusinessHeader from "./components/BusinessHeader";

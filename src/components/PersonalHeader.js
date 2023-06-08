@@ -6,25 +6,22 @@ import { Outlet } from 'react-router-dom';
 
 function PersonalHeader() {
   return (
-    <>
-      <Navbar bg="info" expand="lg">
-        <Container>
-          <Navbar.Brand>Облік витрат</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="main">Головна</Nav.Link>
-              <Nav.Link href="records">Записи</Nav.Link>
-              <Nav.Link href="budgets">Бюджети</Nav.Link>
-              <Nav.Link href="groups">Групи</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <Container className="mt-5">
+    <div className="d-flex h-100">
+    <Navbar expand="md" className="vertical-navbar align-items-start px-0 pt-5" style={{ width: '200px' }}>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav w-100">
+        <Nav className="flex-column w-100">
+              <Nav.Link href="main" className="rounded-button">Головна</Nav.Link>
+              <Nav.Link href="records" className="rounded-button">Записи</Nav.Link>
+              <Nav.Link href="budgets" className="rounded-button">Бюджети</Nav.Link>
+              <Nav.Link href="groups" className="rounded-button">Групи</Nav.Link>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
+      <Container className="mt-5 mx-5 flex-grow-1">
         <Outlet />
       </Container>
-    </>
+    </div>
   );
 }
 

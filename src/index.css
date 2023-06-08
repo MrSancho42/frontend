@@ -1,0 +1,150 @@
+.vertical-navbar {
+  background: linear-gradient(to right, #84fab0, #8fd3f4);
+  padding: 10px;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.vertical-navbar .nav-link {
+  padding: 20px 10px 20px 0;
+  /* border-radius: 10px; */
+  margin-bottom: 10px;
+  font-size: 20px;
+  transition: background-color 0.3s ease;
+}
+
+
+.vertical-navbar .nav-link:hover {
+  background: linear-gradient(to right, #21b356, #8fd3f4);
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background: linear-gradient(to right, #00c853, #00acc1);
+    border-radius: 10px;
+    color: white;
+  }
+  
+  .block-content {
+    align-self: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .block-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+  
+  .block-text {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .block-subtext {
+    font-size: 14px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+  
+  .block-button-container {
+    margin-top: auto;
+    margin-left: auto;
+  }
+  
+  .block-button {
+    padding: 6px 30px;
+    background-color: white;
+    color: #00acc1;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+.input-title {
+    font-weight: bold;
+}
+
+.input-field {
+    border: 3px solid;
+    border-radius: 0;
+    padding: 8px;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+
+  }
+
+.sq-modal {
+    background: linear-gradient(to right, #00c853, #00acc1);
+    color: white;
+    border-radius: 0;
+}
+
+.btn-primary {
+    background-image: linear-gradient(to right, darkblue, darkorchid);
+    color: white;
+  }
+
+
+.add-button {
+    background-image: linear-gradient(to right, darkblue, darkorchid);
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+    color: white;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+}
+
+.finance-block {
+    border-radius: 25px;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    overflow: hidden;
+  }
+
+.red-status {
+    display: inline-block;
+    padding: 6px;
+    color: white;
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to right, #f44336, #e91e63) 1;
+    background: linear-gradient(to right, #f44336, #e91e63);
+    background-clip: padding-box;
+}
+.green-status {
+    display: inline-block;
+    padding: 6px;
+    color: white;
+    border-width: 2px;
+    border-style: solid;
+    border-image: linear-gradient(to right, #4caf50, #8bc34a) 1;
+    background: linear-gradient(to right, #4caf50, #8bc34a);
+    background-clip: padding-box;
+}
+
+.green-type {
+    color: black;
+    border-width: 3px;
+    font-weight: bold;
+}
+
+
+
+.calendar input {
+    border: 3px solid;
+    border-radius: 0;
+    padding: 8px;
+    border-image: linear-gradient(to right, darkblue, darkorchid) 1;
+}
+
+.calendar div {
+    color: darkblue;
+}
